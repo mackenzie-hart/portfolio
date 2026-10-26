@@ -70,7 +70,14 @@ const caseStudies = [
           <div class="case-link" data-hover-bg={cs.hoverBg} data-cursor-text={cs.cursorText}>
             <div class="case-thumb" aria-hidden="true">
               {cs.image
-                ? <Image src={cs.image} alt={cs.title} class="case-thumb__img" width={800} format="webp" quality={80} />
+                ? <Image
+                    src={cs.image}
+                    alt={cs.title}
+                    class="case-thumb__img"
+                    width={1400}
+                    format="webp"
+                    quality={88}
+                  />
                 : <span>{cs.title[0]}</span>
               }
               {cs.video && (
