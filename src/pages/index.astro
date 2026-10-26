@@ -86,7 +86,7 @@ const caseStudies = [
               {cs.gif && (
                 <img
                   class="case-thumb__gif"
-                  src={cs.gif}
+                  data-src={cs.gif}
                   alt=""
                   aria-hidden="true"
                 />
@@ -134,7 +134,15 @@ const caseStudies = [
       if (cursorSpan && el.dataset.cursorText) cursorSpan.textContent = el.dataset.cursorText;
       if (hoverBg && thumb) thumb.style.backgroundColor = hoverBg;
       if (video) video.play();
-      if (gif) { const s = gif.src; gif.src = ''; gif.src = s; }
+      if (gif) {
+        if (!gif.src && gif.dataset.src) {
+          gif.src = gif.dataset.src;
+        } else {
+          const s = gif.src;
+          gif.src = '';
+          gif.src = s;
+        }
+      }
     });
     link.addEventListener('mouseleave', () => {
       cursor.classList.remove('visible');
