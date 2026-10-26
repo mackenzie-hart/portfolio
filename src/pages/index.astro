@@ -1,18 +1,17 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import rumeThumb from '../assets/thumbs/rume-thumb.png';
-import aetherThumb from '../assets/thumbs/aether-bg.png';
-import greenroomThumb from '../assets/thumbs/greenroom-bg.png';
 
 const b = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
+// Thumbnails below are pre-built via scripts/optimize-thumbnails.mjs from the
+// raw exports in src/assets/thumbs/ — resized, sharpened, and WebP-encoded
+// ahead of time rather than processed on the fly.
 const caseStudies = [
   {
     slug: 'rume',
     title: 'Rume',
     description: 'A contemplative memory collection app.',
-    image: rumeThumb,
+    image: `${b}thumbs/rume-thumb.webp`,
     video: `${b}rume-flow.mov`,
     hoverBg: '#000',
     cursorText: 'View case study',
@@ -21,7 +20,7 @@ const caseStudies = [
     slug: 'aether',
     title: 'Aether',
     description: 'An app that assesses social rhythm and provides mindful methods to benefit mental health.',
-    image: aetherThumb,
+    image: `${b}thumbs/aether-bg.webp`,
     gif: `${b}aether-flow.gif`,
     hoverBg: '#fff',
     cursorText: 'Case study coming soon',
@@ -30,7 +29,7 @@ const caseStudies = [
     slug: 'greenroom',
     title: 'Greenroom',
     description: 'A concert logging app for live music lovers.',
-    image: greenroomThumb,
+    image: `${b}thumbs/greenroom-bg.webp`,
     cursorText: 'Case study coming soon',
   },
 ];
@@ -70,13 +69,14 @@ const caseStudies = [
           <div class="case-link" data-hover-bg={cs.hoverBg} data-cursor-text={cs.cursorText}>
             <div class="case-thumb" aria-hidden="true">
               {cs.image
-                ? <Image
+                ? <img
                     src={cs.image}
                     alt={cs.title}
                     class="case-thumb__img"
-                    width={1400}
-                    format="webp"
-                    quality={97}
+                    width="1400"
+                    height="788"
+                    loading="lazy"
+                    decoding="async"
                   />
                 : <span>{cs.title[0]}</span>
               }
